@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-    <h1>hello,maven</h1>
+    <h1>Hello,Maven</h1>
 </body>
 </html>
