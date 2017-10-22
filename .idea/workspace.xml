@@ -615,15 +615,15 @@
       <option name="presentableId" value="Default" />
       <updated>1508506271842</updated>
       <workItem from="1508506274459" duration="613000" />
-      <workItem from="1508640522689" duration="1449000" />
+      <workItem from="1508640522689" duration="1887000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2062000" />
+    <option name="totallyTimeSpent" value="2500000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="189" y="24" width="1118" height="695" extended-state="0" />
+    <frame x="189" y="24" width="1118" height="695" extended-state="1" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
