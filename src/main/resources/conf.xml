@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--处理数据库下划线 转换为驼峰命名-->
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+    </settings>
+
+    <!-- 注册别名-->
+    <typeAliases>
+        <typeAlias type="com.kaishengit.entity.User" alias="User"/>
+    </typeAliases>
+
+    <environments default="devleopment">
+        <environment id="devleopment">
+            <transactionManager type="JDBC"></transactionManager>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///db_26"/>
+                <property name="username" value="root"/>
+                <property name="password" value="123456"/>
+
+
+            </dataSource>
+
+        </environment>
+    </environments>
+
+        <mappers>
+
+            <mapper resource="com.mybatis3.mappers/usermapper.xml"/>
+        </mappers>
+
+
+</configuration>
