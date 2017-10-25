@@ -1,6 +1,7 @@
 package com.kaishengit.Mapper;
 
 import com.kaishengit.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -9,10 +10,14 @@ import java.util.List;
  */
 public interface UserMapper {
 
-    List<User> findAllUser();
+    User findById(int id);
+    User findByWithTag(int id);
+    int batchSave(@Param("UserList") List<User> UserList);
+  /*  List<User> findAllUser();
     User findById(Integer id);
     void  save(User user);
     void  update (User user);
     void del(User user);
+    List<User> page (int offter,int size);*/
 
 }

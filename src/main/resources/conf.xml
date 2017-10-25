@@ -12,7 +12,9 @@
         <typeAlias type="com.kaishengit.entity.User" alias="User"/>
     </typeAliases>
 
+
     <environments default="devleopment">
+
         <environment id="devleopment">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
@@ -20,8 +22,6 @@
                 <property name="url" value="jdbc:mysql:///db_26"/>
                 <property name="username" value="root"/>
                 <property name="password" value="123456"/>
-
-
             </dataSource>
 
         </environment>
@@ -30,6 +30,7 @@
         <mappers>
 
             <mapper resource="com.mybatis3.mappers/usermapper.xml"/>
+            <mapper resource="com.mybatis3.mappers/ArticleMapper.xml"/>
         </mappers>
 
 

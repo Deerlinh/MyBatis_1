@@ -1,18 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kaishengit.Mapper.UserMapper">
 
-        <select id="findById" resultType="User">
-            SELECT  * from mybatis WHERE  id =#{id}
-       </select>
-        <insert id="save" parameterType="User" >
-          INSERT  INTO  mybatis (name,age) VALUES (#{name},#{age})
-    </insert>
-    <delete id="delete" parameterType="int">
-        DELETE   from mybatis WHERE  id=#{id}
+      <resultMap id="baseMap" type="User">
+          <id column="id" property="id"/>
+          <result column="name" property="name"/>
+          <result column="age" property="age"/>
+          <result column="cls_id" property="clsId"/>
+      </resultMap>
 
 
-    </delete>
+    <resultMap id="userMap" type="User" extends="baseMap">
+         <association property="student" javaType="com.kaishengit.entity.Student">
+            <id column="cls_id" property="id"/>
+            <result column="class_name" property="className"/>
+         </association>
+
+     </resultMap>
+    <select id="findById"  resultType="User" resultMap="userMap">
+        SELECT
+        mybatis.id,
+        `name`,
+        age,
+        cls_id,
+        student.id AS  'student.id',
+        class_name
+     FROM
+        mybatis
+        LEFT JOIN student ON mybatis.cls_id = student.id WHERE mybatis.id =#{id}
+  </select>
+    <resultMap id="userWithTagMap" type="User" extends="baseMap">
+        <collection property="tagList" ofType="com.kaishengit.entity.Tag">
+            <id column="tag_id" property="id"/>
+            <result column="tag_name" property="tagName"/>
+         </collection>
+    </resultMap>
+
+    
+    <select id="findByWithTag" parameterType="int" resultMap="userWithTagMap">
+                   SELECT
+                mybatis.id,
+                NAME,
+                age,
+                cls_id,
+                tag.id AS tid,
+                tag_name
+            FROM
+                mybatis
+            INNER JOIN t_mybatis_tag AS mt ON mybatis.id = mt.mid
+            INNER JOIN tag ON mt.tid = tag.id
+            WHERE
+                mybatis.id = #{userid};
+
+
+    </select>
+    <insert id="batchSave" >
+      INSERT INTO mybatis (NAME, age, cls_id)
+  VALUES
+    <foreach collection="UserList" item="User" separator=",">
+        (#{User.name},#{User.age},#{User.clsId})
+  </foreach>
+  </insert>
 
 </mapper>
+

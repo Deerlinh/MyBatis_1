@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.Mapper.UserMapper">
+
+    <select id="findById" resultType="User">
+    SELECT  * from mybatis WHERE  id =#{id}
+</select>
+    <insert id="save" parameterType="User">
+    INSERT  INTO  mybatis (name,age) VALUES (#{name},#{age})
+</insert>
+    <delete id="delete" parameterType="int">
+    DELETE   from mybatis WHERE  id=#{id}
+
+
+</delete>
+
+    <select id="page" resultType="User">
+        SELECT
+        id,
+        NAME,
+        age
+        FROM
+        mybatis
+        LIMIT
+        #{param1},
+        #{param2}
+
+        <!-- 有两组可以选择，arg0 arg1 或 param1 param2  如果需要自己命名的话 在类中使用@param注解-->
+
+    </select>
+
+
+</mapper>

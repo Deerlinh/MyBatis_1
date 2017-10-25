@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.Mapper.ArticleMapper">
+
+      <select id="find" resultType="com.kaishengit.entity.Article">
+          SELECT * from t_article
+          <if test="title !=null and title!= ''" >
+            WHERE  title like #{title}
+          </if>
+      </select>
+
+    <select id="findByParam" resultType="com.kaishengit.entity.Article">
+      SELECT  * from t_article
+      <where>
+          <if test="title != null and title != ''">
+              WHERE  title LIKE #{title}
+          </if>
+          <if test="simplecontent !=null and simplecontent!= ''">
+              AND simplecontent LIKE  #{simplecontent}
+          </if>
+     </where>
+   </select>
+
+<select id="findByIdList" resultType="com.kaishengit.entity.Article">
+    SELECT * from t_article
+    WHERE  id IN
+    <foreach collection="collection" item="id" separator="," open="(" close=")">
+        #{id}
+ </foreach>
+</select>
+
+</mapper>

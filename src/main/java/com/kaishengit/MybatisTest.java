@@ -7,11 +7,14 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 
 import java.io.IOException;
 import java.io.Reader;
+import java.util.List;
 
 /**
  * Created by 蔡林红 on 2017/10/22.
@@ -19,6 +22,20 @@ import java.io.Reader;
  */
 
 public class MybatisTest {
+
+    private SqlSession sqlSession;
+    private UserMapper userMapper;
+    @Before
+    public void init(){
+
+        sqlSession=sqlSession=MyBatisSqlSessionFactory.getSqlSession();
+        userMapper=sqlSession.getMapper(UserMapper.class);
+    }
+    @After
+    public void colse(){
+        sqlSession.close();
+    }
+
     @Test
     public  void first() throws IOException {
 
@@ -41,8 +58,10 @@ public class MybatisTest {
         User user=userMapper.findById(2);
         System.out.println(user);*/
 
+
+
         sqlSession.close();
-    }
+      }
     @Test
     public  void  delete(){
         SqlSession sqlSession= MyBatisSqlSessionFactory.getSqlSession();
@@ -52,6 +71,14 @@ public class MybatisTest {
 
     }
 
+      /*  @Test
+        public  void page(){
+             List<User> lists=userMapper.page(0,3);
+            for (User user:lists){
+                System.out.println(user);
+            }
+
+        }*/
 
 
 }
