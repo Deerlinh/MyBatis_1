@@ -36,9 +36,13 @@ public class MyTest {
 
     @Test
     public void findById() {
-        User user = userMapper.findById(2);
+        User user = userMapper.findById(2006);
         System.out.println(user);
-        System.out.println(user.getName() + user.getStudent().getClassName());
+       System.out.println(user.getName() + user.getStudent().getClassName());
+       List<Tag> tagList=user.getTagList();
+       for(Tag tag:tagList){
+           System.out.println("tag"+">>>>>>>>>>>>>>"+tag.getTagName()) ;
+}
     }
 
     @Test

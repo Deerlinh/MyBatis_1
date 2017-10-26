@@ -30,7 +30,7 @@ public class MybatisTest {
     @Before
     public void init(){
 
-        sqlSession=sqlSession=MyBatisSqlSessionFactory.getSqlSession();
+        sqlSession=MyBatisSqlSessionFactory.getSqlSession();
         mybatisMapper=sqlSession.getMapper(MybatisMapper.class);
     }
     @After
@@ -65,7 +65,7 @@ public class MybatisTest {
         sqlSession.close();
       }
     @Test
-    public  void  delete(){
+    public  void  delet(){
         User user= new User();
 
         SqlSession sqlSession= MyBatisSqlSessionFactory.getSqlSession();
@@ -88,5 +88,12 @@ public class MybatisTest {
         user.setAge(23);
         user.setClsId(2);
        User user1= mybatisMapper.save(user);
+    }
+    @Test
+    public void delete(){
+        User user= new User();
+        sqlSession.delete("com.kaishengit.Mapper.MybatisMapper.delete",2003);
+        sqlSession.commit();
+        sqlSession.close();
     }
 }

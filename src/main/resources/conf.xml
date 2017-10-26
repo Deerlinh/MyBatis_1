@@ -35,7 +35,9 @@
           <!--如果完全是@注解的话，mapper到Mapper类里边-->
             <mapper resource="com.mybatis3.mappers/usermapper.xml"/>
             <mapper resource="com.mybatis3.mappers/ArticleMapper.xml"/>
+            <mapper resource="com.mybatis3.mappers/StudentMapper.xml"/>
            <mapper class="com.kaishengit.Mapper.MybatisMapper"/>
+            <mapper resource="com.mybatis3.mappers/TagMapper.xml"/>
         </mappers>
 
 

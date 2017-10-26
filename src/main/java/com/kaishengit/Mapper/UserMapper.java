@@ -11,6 +11,7 @@ import java.util.List;
 public interface UserMapper {
 
     User findById(int id);
+
     User findByWithTag(int id);
     int batchSave(@Param("UserList") List<User> UserList);
     int deletePrimaryKey(@Param("idList") List<User> idList);

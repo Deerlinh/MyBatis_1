@@ -2,7 +2,37 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kaishengit.Mapper.UserMapper">
+
+        <mapper namespace="com.kaishengit.Mapper.UserMapper">
+    <resultMap id="baseMap" type="User">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="age" property="age"/>
+        <result column="cls_id" property="clsId"/>
+
+     </resultMap>
+    <!--多表联查，多条sql联查 -->
+    <resultMap id="userWithStudentMap" type="User" extends="baseMap">
+        <association property="student" javaType="com.kaishengit.entity.Student" column="cls_id" select="com.kaishengit.Mapper.StudentMapper.findById"/>
+        <collection property="tagList" ofType="com.kaishengit.Mapper.TagMapper" column="id" select="com.kaishengit.Mapper.TagMapper.findByUserId" />
+    </resultMap>
+
+
+          <select id="findById" resultMap="userWithStudentMap">
+             SELECT
+            mybatis.id,
+            `name`,
+            age,
+            cls_id
+            from
+            mybatis
+            WHERE  mybatis.id=#{id}
+
+         </select>
+
+        </mapper>
+
+    <!--<mapper namespace="com.kaishengit.Mapper.UserMapper">
 
       <resultMap id="baseMap" type="User">
           <id column="id" property="id"/>
@@ -77,5 +107,5 @@
     </delete>
 
 
-</mapper>
+</mapper>-->
 
