@@ -3,14 +3,17 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.kaishengit.Mapper.ArticleMapper">
 
-      <select id="find" resultType="com.kaishengit.entity.Article">
+    <!--缓存添加节点 设置属性(存值大小 回收方式 生存周期)-->
+    <cache size="2048" eviction="FIFO" flushInterval="3000"/>
+
+      <select id="find" resultType="article">
           SELECT * from t_article
           <if test="title !=null and title!= ''" >
             WHERE  title like #{title}
           </if>
       </select>
 
-    <select id="findByParam" resultType="com.kaishengit.entity.Article">
+    <select id="findByParam" resultType="article">
       SELECT  * from t_article
       <where>
           <if test="title != null and title != ''">
@@ -22,7 +25,7 @@
      </where>
    </select>
 
-<select id="findByIdList" resultType="com.kaishengit.entity.Article">
+<select id="findByIdList" resultType="article">
     SELECT * from t_article
     WHERE  id IN
     <foreach collection="collection" item="id" separator="," open="(" close=")">

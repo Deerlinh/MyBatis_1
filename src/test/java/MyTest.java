@@ -21,26 +21,32 @@ import java.util.List;
 public class MyTest {
     private SqlSession sqlSession;
     private UserMapper userMapper;
-    @Before
-    public void init(){
 
-        sqlSession=sqlSession= MyBatisSqlSessionFactory.getSqlSession();
-       userMapper=sqlSession.getMapper(UserMapper.class);
+    @Before
+    public void init() {
+
+        sqlSession = sqlSession = MyBatisSqlSessionFactory.getSqlSession();
+        userMapper = sqlSession.getMapper(UserMapper.class);
     }
+
     @After
-    public void colse(){sqlSession.close();}
-    @Test
-    public  void findById(){
-    User user= userMapper.findById(2);
-        System.out.println(user);
-        System.out.println(user.getName()+user.getStudent().getClassName());
+    public void colse() {
+        sqlSession.close();
     }
+
     @Test
-    public void  findByWithTog(){
-        User user= userMapper.findByWithTag(2);
+    public void findById() {
+        User user = userMapper.findById(2);
         System.out.println(user);
-        List<Tag> tagList=user.getTagList();
-        for(Tag tag:tagList){
+        System.out.println(user.getName() + user.getStudent().getClassName());
+    }
+
+    @Test
+    public void findByWithTog() {
+        User user = userMapper.findByWithTag(2);
+        System.out.println(user);
+        List<Tag> tagList = user.getTagList();
+        for (Tag tag : tagList) {
             System.out.println(tag);
 
         }
@@ -48,22 +54,51 @@ public class MyTest {
 
 
     @Test
-    public  void batchSave(){
-        User user1= new User();
+    public void batchSave() {
+        User user1 = new User();
+
         user1.setName("xixi");
         user1.setAge(22);
         user1.setClsId(2);
-        User user2= new User();
+        User user2 = new User();
         user2.setName("x");
         user2.setAge(22);
         user2.setClsId(2);
-        User user3= new User();
+        User user3 = new User();
         user3.setName("xixisss");
         user3.setAge(22);
         user3.setClsId(2);
-        List<User> userList= Arrays.asList(user1,user2,user3);
-        userMapper.batchSave(userList);
-        sqlSession.commit();
+        List<User> userList = Arrays.asList(user1, user2, user3);
+        for (int i = 0; i < 10000; i++) {
+            if (i > 10000) {
+                break;
+            }
+            userMapper.batchSave(userList);
+            sqlSession.commit();
+
+        }
+
     }
 
+
+    @Test
+    public void deletePrimaryKey() {
+
+
+
+
+        List<User> idList=Arrays.asList();
+
+           int i= idList.size();
+        System.out.println(i);
+        userMapper.deletePrimaryKey(idList);
+
+
+        sqlSession.commit();
+        sqlSession.close();
+
+    }
+
+
 }
+

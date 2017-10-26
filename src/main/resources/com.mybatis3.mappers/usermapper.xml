@@ -58,11 +58,24 @@
     </select>
     <insert id="batchSave" >
       INSERT INTO mybatis (NAME, age, cls_id)
-  VALUES
-    <foreach collection="UserList" item="User" separator=",">
-        (#{User.name},#{User.age},#{User.clsId})
-  </foreach>
+        VALUES
+        <foreach collection="UserList" item="User" separator=",">
+            (#{User.name},#{User.age},#{User.clsId})
+        </foreach>
   </insert>
+    <delete id="deletePrimaryKey" parameterType="User">
+      DELETE  from mybatis
+      WHERE  id=#{idList}
+      <if test="null!= idList and idList.size> 0">
+          AND  id IN
+          <foreach collection="idList" item="id" separator="," open="(" close=")">
+              (#{User.id})
+          </foreach>
+
+      </if>
+
+    </delete>
+
 
 </mapper>
 

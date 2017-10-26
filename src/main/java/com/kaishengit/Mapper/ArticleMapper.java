@@ -13,4 +13,5 @@ public interface ArticleMapper {
     List<Article>  find (@Param("title") String title);
     List<Article> findByParam(Map<String,Object> searchParam);
     List<Article> findByIdList(List<Integer> idList);
+
 }

@@ -1,11 +1,12 @@
 package com.kaishengit.entity;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
  * Created by 蔡林红 on 2017/10/25.
  */
-public class Article {
+public class Article implements Serializable{
     private int id;
 
     @Override

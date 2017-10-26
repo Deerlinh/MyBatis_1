@@ -10,11 +10,14 @@
     <!-- 注册别名-->
     <typeAliases>
         <typeAlias type="com.kaishengit.entity.User" alias="User"/>
+        <typeAlias type="com.kaishengit.entity.Article" alias="article"/>
     </typeAliases>
 
 
-    <environments default="devleopment">
 
+
+    <environments default="devleopment">
+        <!--连接数据库-->
         <environment id="devleopment">
             <transactionManager type="JDBC"></transactionManager>
             <dataSource type="POOLED">
@@ -28,9 +31,11 @@
     </environments>
 
         <mappers>
-
+        <!--如果是xml或者是注解+xml的话，mapper到xml文件中-->
+          <!--如果完全是@注解的话，mapper到Mapper类里边-->
             <mapper resource="com.mybatis3.mappers/usermapper.xml"/>
             <mapper resource="com.mybatis3.mappers/ArticleMapper.xml"/>
+           <mapper class="com.kaishengit.Mapper.MybatisMapper"/>
         </mappers>
 
 

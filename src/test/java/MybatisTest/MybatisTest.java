@@ -1,7 +1,9 @@
-package com.kaishengit;
+package MybatisTest;
 
+import com.kaishengit.Mapper.MybatisMapper;
 import com.kaishengit.Mapper.UserMapper;
 import com.kaishengit.Utils.MyBatisSqlSessionFactory;
+import com.kaishengit.entity.Article;
 import com.kaishengit.entity.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
@@ -24,12 +26,12 @@ import java.util.List;
 public class MybatisTest {
 
     private SqlSession sqlSession;
-    private UserMapper userMapper;
+    private MybatisMapper mybatisMapper;
     @Before
     public void init(){
 
         sqlSession=sqlSession=MyBatisSqlSessionFactory.getSqlSession();
-        userMapper=sqlSession.getMapper(UserMapper.class);
+        mybatisMapper=sqlSession.getMapper(MybatisMapper.class);
     }
     @After
     public void colse(){
@@ -64,21 +66,27 @@ public class MybatisTest {
       }
     @Test
     public  void  delete(){
+        User user= new User();
+
         SqlSession sqlSession= MyBatisSqlSessionFactory.getSqlSession();
+
         sqlSession.delete("com.kaishengit.Mapper.UserMapper.delete",1);
         sqlSession.commit();
         sqlSession.close();
 
     }
+    @Test
+    public  void findById(){
+        User user=mybatisMapper.findById(2002);
+        System.out.println(user);
 
-      /*  @Test
-        public  void page(){
-             List<User> lists=userMapper.page(0,3);
-            for (User user:lists){
-                System.out.println(user);
-            }
-
-        }*/
-
-
+    }
+    @Test
+    public void save(){
+        User user = new User();
+        user.setName("jake");
+        user.setAge(23);
+        user.setClsId(2);
+       User user1= mybatisMapper.save(user);
+    }
 }
